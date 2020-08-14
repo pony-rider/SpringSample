@@ -4,34 +4,35 @@
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 
        xsi:schemaLocation="http://www.springframework.org/schema/context
             http://www.springframework.org/schema/context/spring-context-4.2.xsd
             http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
             http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
             http://www.springframework.org/schema/jdbc https://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
-            http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+            http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+            http://www.springframework.org/schema/data/jpa https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-    <!--<ctx:annotation-config/>
-    <aop:aspectj-autoproxy/>-->
+    <ctx:annotation-config/>
+    <aop:aspectj-autoproxy/>
 
 
     <!-- Здесь ищем именно наши, прикладные бины -->
     <ctx:component-scan base-package="com.samples.springdata"/>
 
-    <!--<ctx:property-placeholder location="classpath:jdbc.properties"/>-->
+    <ctx:property-placeholder location="classpath:spring/jdbc.properties"/>
 
-    <!--<jpa:repositories base-package="com.samples.springdata.repositories"/>-->
+    <jpa:repositories base-package="com.samples.springdata.repositories"/>
 
-   <!-- <bean id="entityManagerFactory"
+    <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="com.samples.springdata.repositories" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="database" value="H2" />
                 <property name="generateDdl" value="true" />
-                &lt;!&ndash;<property name="dialect" value="${hibernate.dialect}"/>&ndash;&gt;
+                <!--<property name="dialect" value="${hibernate.dialect}"/>-->
             </bean>
         </property>
         <property name="jpaProperties">
@@ -39,14 +40,20 @@
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
             </props>
         </property>
+        <!-- Set base package of your entities -->
+        <property name="packagesToScan" value="com.samples.springdata.entity"/>
+        <!-- Set share cache mode -->
+        <property name="sharedCacheMode" value="ENABLE_SELECTIVE"/>
+        <!-- Set validation mode -->
+        <property name="validationMode" value="NONE"/>
     </bean>
 
-    &lt;!&ndash; Configure the transaction manager bean &ndash;&gt;
+    <!-- Configure the transaction manager bean -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
-    </bean>-->
+    </bean>
 
-    <!--<jdbc:embedded-database id="dataSource" type="H2" />-->
+    <jdbc:embedded-database id="dataSource" type="H2" />
 
 
 
