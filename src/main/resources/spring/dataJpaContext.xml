@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:ctx="http://www.springframework.org/schema/context"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
-    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-    http://www.springframework.org/schema/jdbc
-    https://www.springframework.org/schema/jdbc/spring-jdbc.xsd
-    http://www.springframework.org/schema/data/jpa
-    https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-    <!--http://www.springframework.org/schema/tx/spring-tx-4.2.xsd -->
-    <ctx:annotation-config/>
-    <ctx:component-scan base-package="com.samples.springdata"/>
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+            http://www.springframework.org/schema/jdbc https://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+            http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+            http://www.springframework.org/schema/data/jpa
+            https://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd">
 
-    <ctx:property-placeholder location="/WEB-INF/spring/jdbc.properties"/>
+    <ctx:property-placeholder location="classpath:spring/jdbc.properties"/>
 
+    <jpa:repositories base-package="com.samples.springdata.repositories"/>
 
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="com.samples.springdata.repositories" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="database" value="H2" />
@@ -36,6 +33,12 @@
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
             </props>
         </property>
+        <!-- Set base package of your entities -->
+        <property name="packagesToScan" value="com.samples.springdata.entity"/>
+        <!-- Set share cache mode -->
+        <property name="sharedCacheMode" value="ENABLE_SELECTIVE"/>
+        <!-- Set validation mode -->
+        <property name="validationMode" value="NONE"/>
     </bean>
 
     <!-- Configure the transaction manager bean -->
@@ -43,12 +46,10 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
+    <jdbc:embedded-database id="dataSource" type="H2" />
 
-    <!--<tx:annotation-driven />-->
 
-    <!--<jdbc:embedded-database id="dataSource" type="H2" />-->
 
-    <jpa:repositories base-package="com.samples.springdata.repositories"/>
-
+    <tx:annotation-driven />
 
 </beans>
