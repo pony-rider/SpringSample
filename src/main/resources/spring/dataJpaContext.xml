@@ -12,7 +12,7 @@
             http://www.springframework.org/schema/jdbc https://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
             http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx-4.2.xsd
             http://www.springframework.org/schema/data/jpa
-            https://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd">
+            https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
     <ctx:property-placeholder location="classpath:spring/jdbc.properties"/>
 
