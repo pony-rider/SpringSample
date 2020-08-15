@@ -7,16 +7,13 @@
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 
        xsi:schemaLocation="
-            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
-            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
-            http://www.springframework.org/schema/jdbc https://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
-            http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx-4.2.xsd
-            http://www.springframework.org/schema/data/jpa
-            https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+            http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
     <ctx:property-placeholder location="classpath:spring/jdbc.properties"/>
-
-    <jpa:repositories base-package="com.samples.springdata.repositories"/>
 
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -48,8 +45,8 @@
 
     <jdbc:embedded-database id="dataSource" type="H2" />
 
-
-
     <tx:annotation-driven />
+
+    <jpa:repositories base-package="com.samples.springdata.repositories"/>
 
 </beans>
