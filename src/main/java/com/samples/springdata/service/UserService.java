@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -21,5 +22,9 @@ public class UserService {
 
     public User findUserById(Integer id) {
         return userRepository.findOne(id);
+    }
+
+    public List<User> getAll() {
+        return userRepository.findAll();
     }
 }
