@@ -119,12 +119,12 @@
                             <webAppConfig>
                                 <contextPath>/${project.name}/*</contextPath>
                             </webAppConfig>
-                            <systemProperties>
+                            <!--<systemProperties>
                                 <systemProperty>
                                     <name>spring.profiles.active</name>
                                     <value>dev</value>
                                 </systemProperty>
-                            </systemProperties>
+                            </systemProperties>-->
                         </configuration>
                         <executions>
 

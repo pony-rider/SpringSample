@@ -10,7 +10,7 @@ import javax.annotation.PostConstruct;
 
 @Profile("dev")
 @Component
-public class UserRepoInitializer {
+public class UserDataInitializer {
 
     @Autowired
     UserRepository userRepository;
