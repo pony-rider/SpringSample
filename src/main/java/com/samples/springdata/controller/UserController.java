@@ -20,9 +20,9 @@ public class UserController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<User> getUsers() {
-        return userService.getAll();
+    @RequestMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getUsers() {
+        return userService.getAll().toString();
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)

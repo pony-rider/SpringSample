@@ -15,7 +15,6 @@
         <org.hibernate-em-version>4.3.8.Final</org.hibernate-em-version>
         <org.springframework.data-version>1.9.0.RELEASE</org.springframework.data-version>
         <dbcp-version>1.4</dbcp-version>
-        <mysql-connector-version>5.1.28</mysql-connector-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <test.jetty.stop-port>9001</test.jetty.stop-port>
@@ -91,6 +90,13 @@
             <artifactId>h2</artifactId>
             <version>1.4.192</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <profiles>
@@ -113,6 +119,12 @@
                             <webAppConfig>
                                 <contextPath>/${project.name}/*</contextPath>
                             </webAppConfig>
+                            <systemProperties>
+                                <systemProperty>
+                                    <name>spring.profiles.active</name>
+                                    <value>dev</value>
+                                </systemProperty>
+                            </systemProperties>
                         </configuration>
                         <executions>
 
@@ -164,26 +176,26 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${thirdparty.jetty.version}</version>
 
-               <!-- <configuration>
-                    &lt;!&ndash; Настройки для автоматической остановки Jetty удаленно &ndash;&gt;
-                    <stopKey>${test.jetty.stop-key}</stopKey>
-                    <stopPort>${test.jetty.stop-port}</stopPort>
+                <!-- <configuration>
+                     &lt;!&ndash; Настройки для автоматической остановки Jetty удаленно &ndash;&gt;
+                     <stopKey>${test.jetty.stop-key}</stopKey>
+                     <stopPort>${test.jetty.stop-port}</stopPort>
 
-                    &lt;!&ndash; &lt;!&ndash; Context Root приложения &ndash;&gt;
-                     <webAppConfig>
-                         <contextPath>/${test.contextPath}/*</contextPath>
-                     </webAppConfig>&ndash;&gt;
+                     &lt;!&ndash; &lt;!&ndash; Context Root приложения &ndash;&gt;
+                      <webAppConfig>
+                          <contextPath>/${test.contextPath}/*</contextPath>
+                      </webAppConfig>&ndash;&gt;
 
-                    &lt;!&ndash; Jetty host и port &ndash;&gt;
-                    <httpConnector>
-                        <port>${jetty.port}</port>
-                        <host>${jetty.host}</host>
-                    </httpConnector>
+                     &lt;!&ndash; Jetty host и port &ndash;&gt;
+                     <httpConnector>
+                         <port>${jetty.port}</port>
+                         <host>${jetty.host}</host>
+                     </httpConnector>
 
-                    &lt;!&ndash; Указание XML конфигурации Jetty &ndash;&gt;
-                    <contextXml>${project.basedir}/src/main/resources/jetty/local.xml
-                    </contextXml>
-                </configuration>-->
+                     &lt;!&ndash; Указание XML конфигурации Jetty &ndash;&gt;
+                     <contextXml>${project.basedir}/src/main/resources/jetty/local.xml
+                     </contextXml>
+                 </configuration>-->
             </plugin>
         </plugins>
     </build>
