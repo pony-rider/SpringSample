@@ -97,6 +97,26 @@
             <version>1.18.12</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.11.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.11.2</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
 
     <profiles>
@@ -119,12 +139,12 @@
                             <webAppConfig>
                                 <contextPath>/${project.name}/*</contextPath>
                             </webAppConfig>
-                            <!--<systemProperties>
+                            <systemProperties>
                                 <systemProperty>
                                     <name>spring.profiles.active</name>
                                     <value>dev</value>
                                 </systemProperty>
-                            </systemProperties>-->
+                            </systemProperties>
                         </configuration>
                         <executions>
 
